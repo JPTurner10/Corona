@@ -2,16 +2,18 @@
 <html>
     <head>
         <title>Corona Data</title>
+        <script src="Chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
         <script src="jscript.js"></script>
+        <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <input type="button" onclick="getGlobalData()" value="Submit" id="button" >
-        <p id="globalDisplay"></p>
         <form>
             <label for="marketCode">Please enter a NASDAQ market code</label><br>
             <input type="text" id="marketCode" name="marketCode" required="true">
-            <input type="button" id="getMarket" onclick="getMarketData()" value="Get data">
+            <input type="button" id="getMarket" onclick="getGlobalData()" value="Get data">
         </form>
-        <p id="marketDisplay"></p>
+        <br>
+        <canvas id="graph" width="800" height="400" ></canvas>
     </body>
 </html>
