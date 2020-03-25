@@ -5,7 +5,13 @@
         <script src="jscript.js"></script>
     </head>
     <body>
-        <input type="button" onclick="test()" value="Submit" id="button" >
-        <p id="data"></p>
+        <input type="button" onclick="getGlobalData()" value="Submit" id="button" >
+        <p id="globalDisplay"></p>
+        <form>
+            <label for="marketCode">Market code</label><br>
+            <input type="text" id="marketCode" name="marketCode" required="true">
+            <input type="button" id="getMarket" onclick="getMarketData()" value="Get data">
+        </form>
+        <p id="marketDisplay"></p>
     </body>
 </html>
