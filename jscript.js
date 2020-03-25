@@ -17,7 +17,7 @@ function displayGlobalData(data) {
 
 function getMarketData() {
     var code = document.getElementById("marketCode").value
-    var url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&" + code + "=MSFT&interval=5min&apikey=EY8R9HBUQELISBSS"
+    var url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + code + "&interval=5min&apikey=EY8R9HBUQELISBSS"
     console.log(url)
     var xhttp = new XMLHttpRequest()
     xhttp.onreadystatechange = function() {
@@ -30,5 +30,6 @@ function getMarketData() {
 }
 
 function displayMarketData(data) {
+    data = data.substring(326, 534) + " }"
     document.getElementById("marketDisplay").innerHTML = data
 }
