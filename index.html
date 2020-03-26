@@ -2,17 +2,33 @@
 <html>
     <head>
         <title>Corona Data</title>
-        <script src="Chart.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
         <script src="jscript.js"></script>
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
+        <div>
         <form>
-            <label for="marketCode">Please enter a NASDAQ market code</label><br>
+            <label id="enterMarket" for="marketCode">Please enter a NASDAQ market code</label>
             <input type="text" id="marketCode" name="marketCode" required="true">
-            <input type="button" id="getMarket" onclick="getGlobalData()" value="Get data">
+            <br>
+            <label id="selectCountry" for="countries">Please select a country to compare against</label>
+            <select id="countries" name="countries">
+                <option value="China">China</option>
+                <option value="France">France</option>
+                <option value="Germany">Germany</option>
+                <option value="Iran">Iran</option>
+                <option value="Italy">Italy</option>
+                <option value="S. Korea">South Korea</option>
+                <option value="Spain">Spain</option>
+                <option value="Switzerland">Switzerland</option>
+                <option value="UK">United Kingdom</option>
+                <option value="USA">United States</option>
+            </select>
+            <br>
+            <input type="button" id="getDataButton" onclick="getGlobalData()" value="Get data">
         </form>
+        </div>
         <br>
         <canvas id="graph" width="800" height="400" ></canvas>
     </body>

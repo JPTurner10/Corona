@@ -3,11 +3,26 @@ const marketDates = ["2020-01-22", "2020-01-29", "2020-02-05", "2020-02-12", "20
 
 
 function getGlobalData() {
-    var url = "https://corona.lmao.ninja/v2/historical/UK"
+    var country = document.getElementById("countries").value
+    var url = "https://corona.lmao.ninja/v2/historical/" + country
     var xhttp = new XMLHttpRequest()
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200){
             getMarketData(this.response)
+        }
+    }
+    xhttp.open("GET", url, true)
+    xhttp.send()
+}
+
+function getMarketData(casesData) {
+    var code = document.getElementById("marketCode").value
+    var url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + code + "&apikey=EY8R9HBUQELISBSS"
+    console.log(url)
+    var xhttp = new XMLHttpRequest()
+    xhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200){
+            displayGlobalData(casesData, this.response)
         }
     }
     xhttp.open("GET", url, true)
@@ -25,14 +40,14 @@ function displayGlobalData(casesData, marketData) {
     for(i = 0; i < marketDates.length; i++) {
         marketDataArray.push(parseInt(marketData["Time Series (Daily)"][marketDates[i]]["4. close"]))
     }
-    console.log(marketDataArray)
+    document.getElementById("graph").style.border = "medium solid black"
     var chart = document.getElementById("graph")
     var lineChart = new Chart(chart, {
         type: 'line',
         data: {
             labels: covidDates,
             datasets: [{
-              label: 'A',
+              label: 'Cases',
               yAxisID: 'A',
               data: casesDataArray,
               fill: false,
@@ -41,13 +56,13 @@ function displayGlobalData(casesData, marketData) {
               pointBorderColor: "rgba(75,192,192,1)",
               pointBackgroundColor: "#fff"
             }, {
-              label: 'B',
+              label: 'Share value',
               yAxisID: 'B',
               data: marketDataArray,
               fill: false,
-              backgroundColor: "rgba(50,122,122,0.4)",
-              borderColor: "rgba(50,122,122,1)",
-              pointBorderColor: "rgba(50,122,122,1)",
+              backgroundColor: "rgba(145,65,145,0.4)",
+              borderColor: "rgba(145,65,145,1)",
+              pointBorderColor: "rgba(145,65,145,1)",
               pointBackgroundColor: "#fff"
             }]
           },
@@ -61,27 +76,12 @@ function displayGlobalData(casesData, marketData) {
                 id: 'B',
                 type: 'linear',
                 position: 'right',
-                ticks: {
-                  max: 1,
-                  min: 0
-                }
               }]
             }
+            
         }
     })
 }
 
-function getMarketData(casesData) {
-    var code = document.getElementById("marketCode").value
-    var url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + code + "&apikey=EY8R9HBUQELISBSS"
-    console.log(url)
-    var xhttp = new XMLHttpRequest()
-    xhttp.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200){
-            displayGlobalData(casesData, this.response)
-        }
-    }
-    xhttp.open("GET", url, true)
-    xhttp.send()
-}
+
 
