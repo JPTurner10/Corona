@@ -1,6 +1,14 @@
 const covidDates = ["1/22/20", "1/29/20", "2/5/20", "2/12/20", "2/19/20", "2/26/20", "3/4/20", "3/11/20", "3/18/20", "3/24/20"]
 const marketDates = ["2020-01-22", "2020-01-29", "2020-02-05", "2020-02-12", "2020-02-19", "2020-02-26", "2020-03-04", "2020-03-11", "2020-03-18", "2020-03-24"]
 
+const monthToNum = {
+    "Jan": "1",
+    "Feb": "2",
+    "Mar": "3"
+}
+
+var zeroDate = new Date(2020, 0, 22)
+console.log(zeroDate)
 
 function getGlobalData() {
     var country = document.getElementById("countries").value
@@ -27,6 +35,27 @@ function getMarketData(casesData) {
     }
     xhttp.open("GET", url, true)
     xhttp.send()
+}
+
+function getDates(){
+  var currentDate = new Date()
+  marketDates.push(currentDate)
+  var end = false
+  var count = 1
+  console.log(count)
+  while(end == false) {
+    var newDate = new Date()
+    newDate.setDate(newDate.getDate() - (7*count))
+
+  count = count + 1
+  if(count == 1){
+    end = true
+  }
+  }
+}
+
+function convertDate(date){
+    date = monthToNum[toString(date).substring(4, 6)]
 }
 
 function displayGlobalData(casesData, marketData) {
